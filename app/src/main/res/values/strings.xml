@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">Android_Home_Work_Notes</string>
+    <string name="app_name">CitiesAugust30</string>
+    <string name="ebrg">Екатеринбург</string>
+    <string name="msc">Москва</string>
+    <string name="nsk">Новосибирск</string>
+    <string name="sam">Самара</string>
+    <string name="spb">Санкт-Петербург</string>
 </resources>

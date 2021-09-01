@@ -1,8 +1,10 @@
-package geekbrains.android_home_work_notes;
+package geekbrains.android_home_work_notes.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import geekbrains.android_home_work_notes.R;
 
 public class MainActivity extends AppCompatActivity {
 
