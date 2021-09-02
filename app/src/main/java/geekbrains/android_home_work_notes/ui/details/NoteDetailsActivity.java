@@ -7,26 +7,26 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
 import geekbrains.android_home_work_notes.R;
-import geekbrains.android_home_work_notes.domain.City;
+import geekbrains.android_home_work_notes.domain.Note;
 
-public class CityDetailsActivity extends AppCompatActivity {
+public class NoteDetailsActivity extends AppCompatActivity {
 
-    public static final String ARG_CITY = "ARG_CITY";
+    public static final String ARG_NOTE = "ARG_NOTE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_city_details);
+        setContentView(R.layout.activity_note_details);
 
         if (getResources().getBoolean(R.bool.isLandscape)) {
             finish();
         } else {
             FragmentManager fragmentManager = getSupportFragmentManager();
 
-            City city = getIntent().getParcelableExtra(ARG_CITY);
+            Note note = getIntent().getParcelableExtra(ARG_NOTE);
 
             fragmentManager.beginTransaction()
-                    .replace(R.id.container, CityDetailsFragment.newInstance(city), "CityDetailsFragment")
+                    .replace(R.id.container, NoteDetailsFragment.newInstance(note), "CityDetailsFragment")
                     .commit();
         }
     }

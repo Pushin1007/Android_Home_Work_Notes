@@ -5,5 +5,5 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:name="geekbrains.android_home_work_notes.ui.list.CitiesListFragment"
+    android:name="geekbrains.android_home_work_notes.ui.list.NotesListFragment"
     tools:context=".ui.MainActivity"/>
