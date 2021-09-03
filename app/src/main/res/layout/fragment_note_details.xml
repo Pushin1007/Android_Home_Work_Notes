@@ -9,36 +9,31 @@
         android:id="@+id/note_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/default_margin"
+        android:layout_margin="@dimen/margin5"
         android:gravity="center"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-        tools:text="@string/nsk" />
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
+        tools:text="@string/noteName1" />
 
     <TextView
         android:id="@+id/note_data"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/default_margin"
-        android:gravity="left"
+        android:gravity="right"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-        tools:text="@string/nsk" />
+        tools:text="@string/noteData1" />
 
-    <TextView
-        android:id="@+id/note_text"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/default_margin"
-        android:gravity="center"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-        tools:text="@string/nsk" />
+        android:layout_height="match_parent">
 
-
-<!--    <ImageView-->
-<!--        android:id="@+id/img_coat_of_arms"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="center"-->
-<!--        tools:src="@drawable/msc"-->
-<!--        />-->
+        <TextView
+            android:id="@+id/note_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+            tools:text="@string/noteText1" />
+    </androidx.core.widget.NestedScrollView>
 
 </LinearLayout>

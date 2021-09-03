@@ -3,7 +3,6 @@ package geekbrains.android_home_work_notes.ui.details;
 
 import android.os.Bundle;
 import android.view.View;
-//import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,7 +20,6 @@ public class NoteDetailsFragment extends Fragment {
     private TextView noteName;
     private TextView noteData;
     private TextView noteText;
-//    private ImageView coat;
 
     public NoteDetailsFragment() {
         super(R.layout.fragment_note_details);
@@ -45,17 +43,17 @@ public class NoteDetailsFragment extends Fragment {
         noteData = view.findViewById(R.id.note_data);
         noteText = view.findViewById(R.id.note_text);
 
-//        coat = view.findViewById(R.id.img_coat_of_arms);
 
-        getParentFragmentManager().setFragmentResultListener(NotesListFragment.KEY_SELECTED_NOTE, getViewLifecycleOwner(), new FragmentResultListener() {
-            @Override
-            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
+        getParentFragmentManager().setFragmentResultListener(NotesListFragment.KEY_SELECTED_NOTE,
+                getViewLifecycleOwner(), new FragmentResultListener() {
+                    @Override
+                    public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
 
-                Note note = result.getParcelable(NotesListFragment.ARG_NOTE);
+                        Note note = result.getParcelable(NotesListFragment.ARG_NOTE);
 
-                displayNote(note);
-            }
-        });
+                        displayNote(note);
+                    }
+                });
 
         if (getArguments() != null && getArguments().containsKey(ARG_NOTE)) {
 
@@ -72,7 +70,6 @@ public class NoteDetailsFragment extends Fragment {
         noteData.setText(note.getDataNote());
         noteText.setText(note.getTextNote());
 
-//        coat.setImageResource(note.getTextNote());
     }
 }
 
