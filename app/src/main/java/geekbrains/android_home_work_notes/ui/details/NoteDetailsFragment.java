@@ -19,6 +19,8 @@ public class NoteDetailsFragment extends Fragment {
 
     private static final String ARG_NOTE = "ARG_NOTE";
     private TextView noteName;
+    private TextView noteData;
+    private TextView noteText;
     private ImageView coat;
 
     public NoteDetailsFragment() {
@@ -40,8 +42,10 @@ public class NoteDetailsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         noteName = view.findViewById(R.id.note_name);
+        noteData = view.findViewById(R.id.note_data);
+        noteText = view.findViewById(R.id.note_text);
 
-        coat = view.findViewById(R.id.img_coat_of_arms);
+//        coat = view.findViewById(R.id.img_coat_of_arms);
 
         getParentFragmentManager().setFragmentResultListener(NotesListFragment.KEY_SELECTED_NOTE, getViewLifecycleOwner(), new FragmentResultListener() {
             @Override
@@ -65,8 +69,10 @@ public class NoteDetailsFragment extends Fragment {
 
     private void displayNote(Note note) {
         noteName.setText(note.getNameNote());
+        noteData.setText(note.getNameNote());
+        noteText.setText(note.getNameNote());
 
-        coat.setImageResource(note.getTextNote());
+//        coat.setImageResource(note.getTextNote());
     }
 }
 

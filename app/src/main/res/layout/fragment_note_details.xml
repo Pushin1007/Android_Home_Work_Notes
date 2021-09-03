@@ -11,15 +11,34 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/default_margin"
         android:gravity="center"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
         tools:text="@string/nsk" />
 
-    <ImageView
-        android:id="@+id/img_coat_of_arms"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/note_data"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        tools:src="@drawable/msc"
-        />
+        android:layout_margin="@dimen/default_margin"
+        android:gravity="left"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+        tools:text="@string/nsk" />
+
+    <TextView
+        android:id="@+id/note_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+        tools:text="@string/nsk" />
+
+
+<!--    <ImageView-->
+<!--        android:id="@+id/img_coat_of_arms"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="center"-->
+<!--        tools:src="@drawable/msc"-->
+<!--        />-->
 
 </LinearLayout>

@@ -11,11 +11,13 @@ public class DeviceNotesRepository implements NotesRepository {
     public List<Note> getNotes() {
         ArrayList<Note> notes = new ArrayList<>();
 
-        notes.add(new Note(R.string.ebrg, R.drawable.ebrg));
-        notes.add(new Note(R.string.msc, R.drawable.msc));
-        notes.add(new Note(R.string.nsk, R.drawable.nsk));
-        notes.add(new Note(R.string.sam, R.drawable.sam));
-        notes.add(new Note(R.string.spb, R.drawable.spb));
+        notes.add(new Note(R.string.not1, R.drawable.ebrg));
+        notes.add(new Note(R.string.not2, R.drawable.ebrg));
+        notes.add(new Note(R.string.not3, R.drawable.ebrg));
+        notes.add(new Note(R.string.not4, R.drawable.ebrg));
+        notes.add(new Note(R.string.not5, R.drawable.ebrg));
+        notes.add(new Note(R.string.not6, R.drawable.ebrg));
+        notes.add(new Note(R.string.not7, R.drawable.ebrg));
 
         return notes;
     }

@@ -5,4 +5,15 @@
     <string name="nsk">Новосибирск</string>
     <string name="sam">Самара</string>
     <string name="spb">Санкт-Петербург</string>
+
+    <string name="not1">First look</string>
+    <string name="not2">Layouts</string>
+    <string name="not3">Activities</string>
+    <string name="not4">Resourses</string>
+    <string name="not5">Intents</string>
+    <string name="not6">Rragments</string>
+    <string name="not7">Navigation</string>
+
+
+    first look, layouts, activities, resources, intents, fragments, navigation
 </resources>
