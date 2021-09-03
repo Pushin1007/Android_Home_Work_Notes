@@ -1,8 +1,11 @@
 package geekbrains.android_home_work_notes.ui.details;
 
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.text.format.DateUtils;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -10,8 +13,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
 
+import java.util.Calendar;
+
 import geekbrains.android_home_work_notes.R;
 import geekbrains.android_home_work_notes.domain.Note;
+
 import geekbrains.android_home_work_notes.ui.list.NotesListFragment;
 
 public class NoteDetailsFragment extends Fragment {
@@ -20,6 +26,8 @@ public class NoteDetailsFragment extends Fragment {
     private TextView noteName;
     private TextView noteData;
     private TextView noteText;
+
+    Calendar date = Calendar.getInstance();
 
     public NoteDetailsFragment() {
         super(R.layout.fragment_note_details);
@@ -71,5 +79,31 @@ public class NoteDetailsFragment extends Fragment {
         noteText.setText(note.getTextNote());
 
     }
+
+// Вот тут просит контекст. Я подставил getContext(), так по крайне мере компилируется
+    public void setDate(View v) {     // отображаем диалоговое окно для выбора даты
+        new DatePickerDialog(getContext(), d, date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH))
+                .show();
+    }
+
+    // Аналогично и  тут просит контекст. Я подставил getContext(), так по крайне мере компилируется
+    private void setInitialDateTime() {      // установка начальных даты и времени
+
+        noteData.setText(DateUtils.formatDateTime(getContext(),
+                date.getTimeInMillis(),
+                DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR
+                        | DateUtils.FORMAT_SHOW_TIME));
+    }
+
+
+    DatePickerDialog.OnDateSetListener d = new DatePickerDialog.OnDateSetListener() {      //     установка обработчика выбора даты
+        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+            date.set(Calendar.YEAR, year);
+            date.set(Calendar.MONTH, monthOfYear);
+            date.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            setInitialDateTime();
+        }
+    };
+
 }
 
