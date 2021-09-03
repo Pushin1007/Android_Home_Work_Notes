@@ -6,13 +6,21 @@
     <string name="sam">Самара</string>
     <string name="spb">Санкт-Петербург</string>
 
-    <string name="not1">First look</string>
-    <string name="not2">Layouts</string>
-    <string name="not3">Activities</string>
-    <string name="not4">Resourses</string>
-    <string name="not5">Intents</string>
-    <string name="not6">Rragments</string>
-    <string name="not7">Navigation</string>
+    <string name="not1name">First look</string>
+    <string name="not2name">Layouts</string>
+    <string name="not3name">Activities</string>
+    <string name="not4name">Resourses</string>
+    <string name="not5name">Intents</string>
+    <string name="not6name">Rragments</string>
+    <string name="not7name">Navigation</string>
+
+    <string name="not1data">12.08.2021</string>
+    <string name="not2data">16.08.2021</string>
+    <string name="not3data">19.08.2021</string>
+    <string name="not4data">23.08.2021</string>
+    <string name="not5data">26.08.2021</string>
+    <string name="not6data">30.08.2021</string>
+    <string name="not7data">02.09.2021</string>
 
 
     first look, layouts, activities, resources, intents, fragments, navigation

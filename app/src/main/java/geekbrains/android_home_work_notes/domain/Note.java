@@ -11,17 +11,24 @@ public class Note implements Parcelable {
     @StringRes
     private int nameNote;
 
+    @StringRes
+    private int dataNote;
+
     @DrawableRes
     private int textNote;
 
-    public Note(int nameNote, int textNote) {
+    public Note(int nameNote,int dataNote, int textNote) {
         this.nameNote = nameNote;
+        this.dataNote = dataNote;
         this.textNote = textNote;
+
     }
 
     protected Note(Parcel in) {
         nameNote = in.readInt();
+        dataNote = in.readInt();
         textNote = in.readInt();
+
     }
 
     public static final Creator<Note> CREATOR = new Creator<Note>() {
@@ -44,6 +51,10 @@ public class Note implements Parcelable {
         return nameNote;
     }
 
+    public int getDataNote() {
+        return dataNote;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -52,6 +63,7 @@ public class Note implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(nameNote);
+        dest.writeInt(dataNote);
         dest.writeInt(textNote);
     }
 }

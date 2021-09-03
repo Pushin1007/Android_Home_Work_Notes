@@ -69,7 +69,7 @@ public class NoteDetailsFragment extends Fragment {
 
     private void displayNote(Note note) {
         noteName.setText(note.getNameNote());
-        noteData.setText(note.getNameNote());
+        noteData.setText(note.getDataNote());
         noteText.setText(note.getNameNote());
 
 //        coat.setImageResource(note.getTextNote());
