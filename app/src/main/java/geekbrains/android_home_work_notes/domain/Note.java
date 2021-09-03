@@ -3,7 +3,6 @@ package geekbrains.android_home_work_notes.domain;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.annotation.DrawableRes;
 import androidx.annotation.StringRes;
 
 public class Note implements Parcelable {
@@ -14,10 +13,10 @@ public class Note implements Parcelable {
     @StringRes
     private int dataNote;
 
-    @DrawableRes
+    @StringRes
     private int textNote;
 
-    public Note(int nameNote,int dataNote, int textNote) {
+    public Note(int nameNote, int dataNote, int textNote) {
         this.nameNote = nameNote;
         this.dataNote = dataNote;
         this.textNote = textNote;

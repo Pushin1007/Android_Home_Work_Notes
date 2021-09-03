@@ -3,7 +3,7 @@ package geekbrains.android_home_work_notes.ui.details;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
+//import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,7 +21,7 @@ public class NoteDetailsFragment extends Fragment {
     private TextView noteName;
     private TextView noteData;
     private TextView noteText;
-    private ImageView coat;
+//    private ImageView coat;
 
     public NoteDetailsFragment() {
         super(R.layout.fragment_note_details);
@@ -70,7 +70,7 @@ public class NoteDetailsFragment extends Fragment {
     private void displayNote(Note note) {
         noteName.setText(note.getNameNote());
         noteData.setText(note.getDataNote());
-        noteText.setText(note.getNameNote());
+        noteText.setText(note.getTextNote());
 
 //        coat.setImageResource(note.getTextNote());
     }
