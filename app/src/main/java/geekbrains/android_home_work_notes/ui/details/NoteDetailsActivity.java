@@ -28,6 +28,8 @@ public class NoteDetailsActivity extends AppCompatActivity {
             fragmentManager.beginTransaction()
                     .replace(R.id.container, NoteDetailsFragment.newInstance(note), "NoteDetailsFragment")
                     .commit();
+
+
         }
     }
 
