@@ -27,7 +27,7 @@ public class NoteDetailsFragment extends Fragment {
     private TextView noteData;
     private TextView noteText;
 
-    Calendar date = Calendar.getInstance();
+    private Calendar date = Calendar.getInstance();
 
     public NoteDetailsFragment() {
         super(R.layout.fragment_note_details);
@@ -50,6 +50,13 @@ public class NoteDetailsFragment extends Fragment {
         noteName = view.findViewById(R.id.note_name);
         noteData = view.findViewById(R.id.note_data);
         noteText = view.findViewById(R.id.note_text);
+
+        noteData.setOnClickListener(new View.OnClickListener() {   // отображаем диалоговое окно для выбора даты
+            @Override
+            public void onClick(View v) {
+                new DatePickerDialog(getContext(), d, date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
 
 
         getParentFragmentManager().setFragmentResultListener(NotesListFragment.KEY_SELECTED_NOTE,
@@ -77,24 +84,12 @@ public class NoteDetailsFragment extends Fragment {
         noteName.setText(note.getNameNote());
         noteData.setText(note.getDataNote());
         noteText.setText(note.getTextNote());
-
     }
 
-// Вот тут просит контекст. Я подставил getContext(), так по крайне мере компилируется
-    public void setDate(View v) {     // отображаем диалоговое окно для выбора даты
-        new DatePickerDialog(getContext(), d, date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH))
-                .show();
-    }
 
-    // Аналогично и  тут просит контекст. Я подставил getContext(), так по крайне мере компилируется
     private void setInitialDateTime() {      // установка начальных даты и времени
-
-        noteData.setText(DateUtils.formatDateTime(getContext(),
-                date.getTimeInMillis(),
-                DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR
-                        | DateUtils.FORMAT_SHOW_TIME));
+        noteData.setText(DateUtils.formatDateTime(getContext(), date.getTimeInMillis(), DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR));
     }
-
 
     DatePickerDialog.OnDateSetListener d = new DatePickerDialog.OnDateSetListener() {      //     установка обработчика выбора даты
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
