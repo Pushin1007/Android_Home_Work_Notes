@@ -7,6 +7,7 @@ import android.text.format.DateUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,7 +51,27 @@ public class NoteDetailsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Toolbar toolbar = view.findViewById(R.id.toolbar_details);
+        View name = view.findViewById(R.id.note_name); // Всплывающее поп меню  при нажатии на названии заметки
+        name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu popupMenu = new PopupMenu(requireContext(), v);
+                getActivity().getMenuInflater().inflate(R.menu.menu_pop_up_list, popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        if (item.getItemId() == R.id.delete) {
+                            Toast.makeText(requireContext(), "Delete this note", Toast.LENGTH_SHORT).show();
+                            return true;
+                        }
+                        return false;
+                    }
+                });
+                popupMenu.show(); // показываем всплывающее менб
+            }
+        });
+
+        Toolbar toolbar = view.findViewById(R.id.toolbar_details); // отрабатывыем нажатия на меню в етализации заметок
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -59,17 +80,29 @@ public class NoteDetailsFragment extends Fragment {
                     return true;
                 }
 
+                if (item.getItemId() == R.id.change_name) {
+                    Toast.makeText(requireContext(), "To do change name note", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+
+                if (item.getItemId() == R.id.change_data) {
+                    Toast.makeText(requireContext(), "To do change data note", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+                if (item.getItemId() == R.id.edit_note) {
+                    Toast.makeText(requireContext(), "Edit this note", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+
+
                 return false;
             }
         });
-        
-        
+
 
         noteName = view.findViewById(R.id.note_name);
         noteData = view.findViewById(R.id.note_data);
         noteText = view.findViewById(R.id.note_text);
-
-
 
         noteData.setOnClickListener(new View.OnClickListener() {   // отображаем диалоговое окно для выбора даты
             @Override

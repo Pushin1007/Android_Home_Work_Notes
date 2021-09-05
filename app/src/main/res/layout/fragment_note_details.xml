@@ -55,4 +55,5 @@
             tools:text="@string/noteText1" />
     </androidx.core.widget.NestedScrollView>
 
+
 </LinearLayout>
