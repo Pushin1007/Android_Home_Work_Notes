@@ -80,7 +80,7 @@ public class NotesListFragment extends Fragment implements CitiesListView {
 
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
 
-            public boolean onCreateOptionsMenu(Menu view) { // это если поиск - виджет
+            public boolean onCreateOptionsMenu(Menu view) { // это если поиск - виджет, возможно его использовать не буду
 
                 MenuItem search = view.findItem(R.id.search_note);
                 SearchView searchView = (SearchView) search.getActionView();
