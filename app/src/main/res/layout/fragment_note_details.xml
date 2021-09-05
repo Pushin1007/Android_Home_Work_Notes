@@ -19,7 +19,8 @@
             app:menu="@menu/menu_note_details"
             app:title="@string/note"
             android:gravity="center"
-            app:titleTextColor="#D0E12E" />
+            app:titleTextColor="#D0E12E"
+            app:navigationIcon="@drawable/ic_launcher_foreground"/>
 
     </com.google.android.material.appbar.AppBarLayout>
     <TextView
