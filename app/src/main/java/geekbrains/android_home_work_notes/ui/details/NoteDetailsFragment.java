@@ -4,12 +4,15 @@ package geekbrains.android_home_work_notes.ui.details;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.text.format.DateUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
 
@@ -47,15 +50,33 @@ public class NoteDetailsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        Toolbar toolbar = view.findViewById(R.id.toolbar_details);
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                if (item.getItemId() == R.id.note_important) {
+                    Toast.makeText(requireContext(), "To do this note important", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+
+                return false;
+            }
+        });
+        
+        
+
         noteName = view.findViewById(R.id.note_name);
         noteData = view.findViewById(R.id.note_data);
         noteText = view.findViewById(R.id.note_text);
+
+
 
         noteData.setOnClickListener(new View.OnClickListener() {   // отображаем диалоговое окно для выбора даты
             @Override
             public void onClick(View v) {
                 new DatePickerDialog(getContext(), d, date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH)).show();
             }
+
         });
 
 

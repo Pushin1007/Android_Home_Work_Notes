@@ -4,13 +4,16 @@ package geekbrains.android_home_work_notes.ui.list;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import geekbrains.android_home_work_notes.R;
@@ -69,6 +72,25 @@ public class NotesListFragment extends Fragment implements CitiesListView {
         container = view.findViewById(R.id.root);
 
         presenter.requestNotes();
+        Toolbar toolbar = view.findViewById(R.id.toolbar_list);
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                if (item.getItemId() == R.id.search_note) {
+                    Toast.makeText(requireContext(), "Search note", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+
+                if (item.getItemId() == R.id.add_note) {
+                    Toast.makeText(requireContext(), "Add new note", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+
+
+                return false;
+            }
+        });
+
     }
 
     @Override

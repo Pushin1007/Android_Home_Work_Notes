@@ -67,6 +67,8 @@
         Между этими экранами необходимо переключаться посредством
         действий пользователя или определённых событий.
 </string>
+    <string name="note">Note</string>
+    <string name="note_list">Notes List</string>
 
 
     first look, layouts, activities, resources, intents, fragments, navigation
