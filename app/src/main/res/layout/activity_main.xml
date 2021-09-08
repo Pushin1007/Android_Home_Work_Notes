@@ -7,13 +7,13 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".NavigationDrawerActivity">
 
-
-        <androidx.fragment.app.FragmentContainerView
+         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/notes_list"
             android:name="geekbrains.android_home_work_notes.ui.list.NotesListFragment"
             android:layout_width="match_parent"

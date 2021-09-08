@@ -1,6 +1,7 @@
 package geekbrains.android_home_work_notes.ui.list;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,9 +14,11 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -27,6 +30,7 @@ import com.google.android.material.snackbar.Snackbar;
 import geekbrains.android_home_work_notes.R;
 import geekbrains.android_home_work_notes.domain.Note;
 import geekbrains.android_home_work_notes.domain.DeviceNotesRepository;
+import geekbrains.android_home_work_notes.ui.MainActivity;
 
 import java.util.Collections;
 import java.util.List;
@@ -83,34 +87,16 @@ public class NotesListFragment extends Fragment implements NotesListView {
             @Override
             public void onNoteClicked(Note note) {
                 if (onNoteClicked != null) {
-                        onNoteClicked.onNoteOnClicked(note);
-                    }
+                    onNoteClicked.onNoteOnClicked(note);
+                }
 
-                    Bundle bundle = new Bundle();
-                    bundle.putParcelable(ARG_NOTE, note);
+                Bundle bundle = new Bundle();
+                bundle.putParcelable(ARG_NOTE, note);
 
-                    getParentFragmentManager().setFragmentResult(KEY_SELECTED_NOTE, bundle);
+                getParentFragmentManager().setFragmentResult(KEY_SELECTED_NOTE, bundle);
 //                Snackbar.make(view, note.getNameNote(), Snackbar.LENGTH_SHORT).show();
             }
         });
-
-
-
-        //            noteItem.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    if (onNoteClicked != null) {
-//                        onNoteClicked.onNoteOnClicked(note);
-//                    }
-//
-//                    Bundle bundle = new Bundle();
-//                    bundle.putParcelable(ARG_NOTE, note);
-//
-//                    getParentFragmentManager().setFragmentResult(KEY_SELECTED_NOTE, bundle);
-//                }
-//            });
-
-
 
 
         RecyclerView notesList = view.findViewById(R.id.notes_list);
@@ -127,32 +113,27 @@ public class NotesListFragment extends Fragment implements NotesListView {
 
         Toolbar toolbar = view.findViewById(R.id.toolbar_list);
 
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+        // Не могу разобраться с этим куском кода. хочу открывать бар через 3 полоски
+        //Если раскоментировать, то компилятор не ругается, но при запуке креш
+        // В отличии от занятия у меня  DrawerLayout привязан к фрагменту, вместо  this  я поставил  getActivity(), может поэтому?
 
-//            public boolean onCreateOptionsMenu(Menu view) { // это если поиск - виджет, возможно его использовать не буду
+        DrawerLayout drawerLayout = view.findViewById(R.id.drawer_layout);
 //
-//                MenuItem search = view.findItem(R.id.search_note);
-//                SearchView searchView = (SearchView) search.getActionView();
+//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+//               getActivity() ,
+//                drawerLayout,
+//                toolbar,
+//                R.string.open_drawer,
+//                R.string.close_drawer);
 //
-//                searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//                    @Override
-//                    public boolean onQueryTextSubmit(String query) {
-//                        return false;
-//                    }
-//
-//                    @Override
-//                    public boolean onQueryTextChange(String newText) {
-//                        return false;
-//                    }
-//                });
-//
-//
-//                return true;
-//            }
+//        drawerLayout.addDrawerListener(toggle);
+//        toggle.syncState();
+
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
 
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                if (item.getItemId() == R.id.search_note) { // это если просто кнопка, возможно к ней вернусь
+                if (item.getItemId() == R.id.search_note) {
                     Toast.makeText(requireContext(), "Search note", Toast.LENGTH_SHORT).show();
                     return true;
                 }
@@ -177,33 +158,6 @@ public class NotesListFragment extends Fragment implements NotesListView {
 
         adapter.setNotes(notes);
         adapter.notifyDataSetChanged();
-        for (Note note : notes) {
-
-//            View noteItem = LayoutInflater.from(requireContext()).inflate(R.layout.item_note, container, false);
-
-//            noteItem.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    if (onNoteClicked != null) {
-//                        onNoteClicked.onNoteOnClicked(note);
-//                    }
-//
-//                    Bundle bundle = new Bundle();
-//                    bundle.putParcelable(ARG_NOTE, note);
-//
-//                    getParentFragmentManager().setFragmentResult(KEY_SELECTED_NOTE, bundle);
-//                }
-//            });
-
-//            TextView noteName = noteItem.findViewById(R.id.note_name);
-//
-//            noteName.setText(note.getNameNote());
-//            TextView noteData = noteItem.findViewById(R.id.note_data);
-//
-//            noteData.setText(note.getDataNote());
-//
-//            container.addView(noteItem);
-        }
     }
 }
 
