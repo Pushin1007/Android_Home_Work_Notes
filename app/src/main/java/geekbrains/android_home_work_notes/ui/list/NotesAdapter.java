@@ -15,9 +15,10 @@ import java.util.List;
 import geekbrains.android_home_work_notes.R;
 import geekbrains.android_home_work_notes.domain.Note;
 
-public class NotesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHolder> {
 
     private final ArrayList<Note> data = new ArrayList<>();
+
     private OnNoteClickedListener listener;
 
     public void setNotes(List<Note> toSet) {
@@ -25,32 +26,27 @@ public class NotesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         data.addAll(toSet);
     }
 
-    @NonNull
-
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public int getItemViewType(int position) {
+        return super.getItemViewType(position);
+    }
+
+    @NonNull
+    @Override
+    public NotesAdapter.NotesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_note, parent, false);
 
         return new NotesViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull NotesAdapter.NotesViewHolder holder, int position) {
         Note note = data.get(position);
 
-        holder.
         holder.getNoteName().setText(note.getNameNote());
 
         holder.getNoteData().setText(note.getDataNote());
-
     }
-
-//            TextView noteName = noteItem.findViewById(R.id.note_name);
-//
-//            noteName.setText(note.getNameNote());
-//            TextView noteData = noteItem.findViewById(R.id.note_data);
-//
-//            noteData.setText(note.getDataNote());
 
     @Override
     public int getItemCount() {
@@ -100,6 +96,6 @@ public class NotesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         public TextView getNoteData() {
             return noteData;
         }
-
     }
 }
+
