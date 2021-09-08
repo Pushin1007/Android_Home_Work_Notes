@@ -3,8 +3,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!--            app:menu="@menu/menu_main"-->
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:menu="@menu/menu_note_details"
+            app:title="@string/note"
+            android:gravity="center"
+            app:titleTextColor="#D0E12E"
+            app:navigationIcon="@drawable/ic_launcher_foreground"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
     <TextView
         android:id="@+id/note_name"
         android:layout_width="match_parent"
@@ -18,7 +36,7 @@
         android:id="@+id/note_data"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="setTime"
+
         android:gravity="right"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
         tools:text="@string/noteData1" />
@@ -36,5 +54,6 @@
             android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
             tools:text="@string/noteText1" />
     </androidx.core.widget.NestedScrollView>
+
 
 </LinearLayout>

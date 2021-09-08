@@ -4,12 +4,16 @@ package geekbrains.android_home_work_notes.ui.details;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.text.format.DateUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
 
@@ -27,7 +31,7 @@ public class NoteDetailsFragment extends Fragment {
     private TextView noteData;
     private TextView noteText;
 
-    Calendar date = Calendar.getInstance();
+    private Calendar date = Calendar.getInstance();
 
     public NoteDetailsFragment() {
         super(R.layout.fragment_note_details);
@@ -47,9 +51,66 @@ public class NoteDetailsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        View name = view.findViewById(R.id.note_name); // Всплывающее поп меню  при нажатии на названии заметки
+        name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu popupMenu = new PopupMenu(requireContext(), v);
+                getActivity().getMenuInflater().inflate(R.menu.menu_pop_up_list, popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        if (item.getItemId() == R.id.delete) {
+                            Toast.makeText(requireContext(), "Delete this note", Toast.LENGTH_SHORT).show();
+                            return true;
+                        }
+                        return false;
+                    }
+                });
+                popupMenu.show(); // показываем всплывающее менб
+            }
+        });
+
+        Toolbar toolbar = view.findViewById(R.id.toolbar_details); // отрабатывыем нажатия на меню в етализации заметок
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                if (item.getItemId() == R.id.note_important) {
+                    Toast.makeText(requireContext(), "To do this note important", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+
+                if (item.getItemId() == R.id.change_name) {
+                    Toast.makeText(requireContext(), "To do change name note", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+
+                if (item.getItemId() == R.id.change_data) {
+                    Toast.makeText(requireContext(), "To do change data note", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+                if (item.getItemId() == R.id.edit_note) {
+                    Toast.makeText(requireContext(), "Edit this note", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+
+
+                return false;
+            }
+        });
+
+
         noteName = view.findViewById(R.id.note_name);
         noteData = view.findViewById(R.id.note_data);
         noteText = view.findViewById(R.id.note_text);
+
+        noteData.setOnClickListener(new View.OnClickListener() {   // отображаем диалоговое окно для выбора даты
+            @Override
+            public void onClick(View v) {
+                new DatePickerDialog(getContext(), d, date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH)).show();
+            }
+
+        });
 
 
         getParentFragmentManager().setFragmentResultListener(NotesListFragment.KEY_SELECTED_NOTE,
@@ -77,24 +138,12 @@ public class NoteDetailsFragment extends Fragment {
         noteName.setText(note.getNameNote());
         noteData.setText(note.getDataNote());
         noteText.setText(note.getTextNote());
-
     }
 
-// Вот тут просит контекст. Я подставил getContext(), так по крайне мере компилируется
-    public void setDate(View v) {     // отображаем диалоговое окно для выбора даты
-        new DatePickerDialog(getContext(), d, date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH))
-                .show();
-    }
 
-    // Аналогично и  тут просит контекст. Я подставил getContext(), так по крайне мере компилируется
     private void setInitialDateTime() {      // установка начальных даты и времени
-
-        noteData.setText(DateUtils.formatDateTime(getContext(),
-                date.getTimeInMillis(),
-                DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR
-                        | DateUtils.FORMAT_SHOW_TIME));
+        noteData.setText(DateUtils.formatDateTime(getContext(), date.getTimeInMillis(), DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR));
     }
-
 
     DatePickerDialog.OnDateSetListener d = new DatePickerDialog.OnDateSetListener() {      //     установка обработчика выбора даты
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {

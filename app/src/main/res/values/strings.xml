@@ -67,6 +67,12 @@
         Между этими экранами необходимо переключаться посредством
         действий пользователя или определённых событий.
 </string>
+    <string name="note">Note</string>
+    <string name="note_list">Notes List</string>
+    <string name="user_name">Dmitry</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="info">This is home work for Android lessons</string>
 
 
     first look, layouts, activities, resources, intents, fragments, navigation

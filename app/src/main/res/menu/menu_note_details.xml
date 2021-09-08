@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/note_important"
+        android:icon="@android:drawable/btn_star"
+        android:title="Set note important"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/change_name"
+        android:icon="@android:drawable/btn_star"
+        android:title="Change name note"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/change_data"
+        android:icon="@android:drawable/btn_star"
+        android:title="Change data note"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/edit_note"
+        android:icon="@android:drawable/btn_star"
+        android:title="Edit note"
+        app:showAsAction="never" />
+
+
+
+</menu>
