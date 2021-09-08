@@ -4,4 +4,5 @@
     <dimen name="margin5">5dp</dimen>
     <dimen name="dim30">30dp</dimen>
     <dimen name="text">24sp</dimen>
+    <dimen name="height_separator">2dp</dimen>
 </resources>
