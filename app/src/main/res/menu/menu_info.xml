@@ -6,4 +6,11 @@
         android:icon="@android:drawable/ic_media_play"
         android:title="About App"
         app:showAsAction="always" />
+
+    <item
+        android:id="@+id/notes_list_menu"
+        android:icon="@android:drawable/ic_media_play"
+        android:title="Notes"
+        app:showAsAction="always" />
+
 </menu>

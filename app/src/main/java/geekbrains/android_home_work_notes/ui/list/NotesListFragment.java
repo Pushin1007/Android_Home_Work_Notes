@@ -16,13 +16,17 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import geekbrains.android_home_work_notes.R;
 import geekbrains.android_home_work_notes.domain.Note;
 import geekbrains.android_home_work_notes.domain.DeviceNotesRepository;
 
+import java.util.Collections;
 import java.util.List;
 
 public class NotesListFragment extends Fragment implements NotesListView {
@@ -73,8 +77,43 @@ public class NotesListFragment extends Fragment implements NotesListView {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        adapter.setListener(new NotesAdapter.OnNoteClickedListener() {
+            @Override
+            public void onNoteClicked(Note note) {
+                if (onNoteClicked != null) {
+                        onNoteClicked.onNoteOnClicked(note);
+                    }
+
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable(ARG_NOTE, note);
+
+                    getParentFragmentManager().setFragmentResult(KEY_SELECTED_NOTE, bundle);
+//                Snackbar.make(view, note.getNameNote(), Snackbar.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+        //            noteItem.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    if (onNoteClicked != null) {
+//                        onNoteClicked.onNoteOnClicked(note);
+//                    }
+//
+//                    Bundle bundle = new Bundle();
+//                    bundle.putParcelable(ARG_NOTE, note);
+//
+//                    getParentFragmentManager().setFragmentResult(KEY_SELECTED_NOTE, bundle);
+//                }
+//            });
+
+
+
+
         RecyclerView notesList = view.findViewById(R.id.notes_list);
         notesList.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false));
+//        notesList.setLayoutManager(new GridLayoutManager(requireContext(), 2));
 
         notesList.setAdapter(adapter);
 
@@ -116,7 +155,11 @@ public class NotesListFragment extends Fragment implements NotesListView {
                     Toast.makeText(requireContext(), "Add new note", Toast.LENGTH_SHORT).show();
                     return true;
                 }
-
+                if (item.getItemId() == R.id.delete_all_notes) {
+                    adapter.setNotes(Collections.emptyList());
+                    adapter.notifyDataSetChanged();
+                    return true;
+                }
 
                 return false;
             }

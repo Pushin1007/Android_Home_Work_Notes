@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface NotesListView {
 
-    void showNotes(List<Note> cities);
+    void showNotes(List<Note> notes);
 }
 

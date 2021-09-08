@@ -13,5 +13,10 @@
         android:title="add"
         app:showAsAction="always" />
 
+    <item
+        android:id="@+id/delete_all_notes"
+        android:icon="@android:drawable/ic_delete"
+        android:title="Delete all"
+        app:showAsAction="always" />
 
 </menu>

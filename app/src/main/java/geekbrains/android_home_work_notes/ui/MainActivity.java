@@ -38,13 +38,17 @@ public class MainActivity extends AppCompatActivity implements NotesListFragment
                             .beginTransaction()
                             .replace(R.id.notes_list, new InfoFragment())
                             .commit();
-
 //                   main.closeDrawer(GravityCompat.START);
 
                     return true;
                 }
-
-
+                if (item.getItemId() == R.id.notes_list_menu) {
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.notes_list, new NotesListFragment())
+                            .commit();
+                    return true;
+                }
                 return false;
             }
         });
