@@ -6,8 +6,6 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -15,7 +13,7 @@ import geekbrains.android_home_work_notes.R;
 import geekbrains.android_home_work_notes.domain.Note;
 import geekbrains.android_home_work_notes.ui.details.NoteDetailsActivity;
 import geekbrains.android_home_work_notes.ui.list.NotesListFragment;
-import geekbrains.android_home_work_notes.ui.list.info;
+import geekbrains.android_home_work_notes.ui.list.InfoFragment;
 
 public class MainActivity extends AppCompatActivity implements NotesListFragment.OnNoteClicked {
 
@@ -38,14 +36,13 @@ public class MainActivity extends AppCompatActivity implements NotesListFragment
 
                     getSupportFragmentManager()
                             .beginTransaction()
-                            .replace(R.id.container, new info())
+                            .replace(R.id.notes_list, new InfoFragment())
                             .commit();
 
 //                   main.closeDrawer(GravityCompat.START);
 
                     return true;
                 }
-
 
 
                 return false;

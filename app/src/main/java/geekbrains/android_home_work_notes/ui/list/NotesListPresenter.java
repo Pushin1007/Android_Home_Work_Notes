@@ -8,11 +8,11 @@ import java.util.List;
 
 public class NotesListPresenter {
 
-    private final CitiesListView view;
+    private final NotesListView view;
 
     private final NotesRepository repository;
 
-    public NotesListPresenter(CitiesListView view, NotesRepository repository) {
+    public NotesListPresenter(NotesListView view, NotesRepository repository) {
         this.view = view;
         this.repository = repository;
     }

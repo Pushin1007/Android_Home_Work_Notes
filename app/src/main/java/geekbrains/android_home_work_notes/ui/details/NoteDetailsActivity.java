@@ -2,11 +2,8 @@ package geekbrains.android_home_work_notes.ui.details;
 
 
 import android.os.Bundle;
-import android.view.MenuItem;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 
 import geekbrains.android_home_work_notes.R;
@@ -31,7 +28,7 @@ public class NoteDetailsActivity extends AppCompatActivity {
             Note note = getIntent().getParcelableExtra(ARG_NOTE);
 
             fragmentManager.beginTransaction()
-                    .replace(R.id.container, NoteDetailsFragment.newInstance(note), "NoteDetailsFragment")
+                    .replace(R.id.notes_list, NoteDetailsFragment.newInstance(note), "NoteDetailsFragment")
                     .commit();
 
 

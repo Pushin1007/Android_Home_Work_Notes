@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 
 import geekbrains.android_home_work_notes.R;
 
-public class info extends Fragment {
-    public info() {
+public class InfoFragment extends Fragment {
+    public InfoFragment() {
     }
 
     @Override
