@@ -35,7 +35,7 @@ import geekbrains.android_home_work_notes.ui.MainActivity;
 import java.util.Collections;
 import java.util.List;
 
-public class NotesListFragment extends Fragment implements NotesListView {
+public class  NotesListFragment extends Fragment implements NotesListView {
 
     public interface OnNoteClicked {
         void onNoteOnClicked(Note note);
@@ -110,8 +110,11 @@ public class NotesListFragment extends Fragment implements NotesListView {
         DividerItemDecoration itemDecoration = new DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL);
         itemDecoration.setDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.bg_separator));
         notesList.addItemDecoration(itemDecoration);
-
+        //
+        //
+        // И уже из фрагмента туда передавать toolbar, в onViewCreated
         Toolbar toolbar = view.findViewById(R.id.toolbar_list);
+
 
         // Не могу разобраться с этим куском кода. хочу открывать бар через 3 полоски
         //Если раскоментировать, то компилятор не ругается, но при запуке креш
@@ -128,6 +131,8 @@ public class NotesListFragment extends Fragment implements NotesListView {
 //
 //        drawerLayout.addDrawerListener(toggle);
 //        toggle.syncState();
+
+
 
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
 
