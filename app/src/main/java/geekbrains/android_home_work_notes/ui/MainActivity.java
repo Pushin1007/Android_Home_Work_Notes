@@ -82,4 +82,23 @@ public class MainActivity extends AppCompatActivity implements NotesListFragment
         super.onSaveInstanceState(outState);
     }
 
+    /*
+    Замечания и исправления преподавателя на 7-е занятие
+    DrawerLayout лежит в Activity, а не во фрагменте
+    (из активити в принципе можно добраться до view фрагмента с findViewById,
+    т.е View фрагмента лежит в активити, в обратную сторону это понятное дело не получится),
+     т.е надо по сути в активити передать метод установки тулбара
+     */
+    public void setDrawerToogle(Toolbar toolbar) {
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this,
+                drawerLayout,
+                toolbar,
+                R.string.open_drawer,
+                R.string.close_drawer);
+
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+    }
 }

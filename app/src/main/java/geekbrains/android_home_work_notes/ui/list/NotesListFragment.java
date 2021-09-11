@@ -101,7 +101,7 @@ public class  NotesListFragment extends Fragment implements NotesListView {
 
         RecyclerView notesList = view.findViewById(R.id.notes_list);
         notesList.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false));
-//        notesList.setLayoutManager(new GridLayoutManager(requireContext(), 2));
+//        notesList.setLayoutManager(new GridLayoutManager(requireContext(), 2)); //вариант с гридом
 
         notesList.setAdapter(adapter);
 
@@ -110,29 +110,14 @@ public class  NotesListFragment extends Fragment implements NotesListView {
         DividerItemDecoration itemDecoration = new DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL);
         itemDecoration.setDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.bg_separator));
         notesList.addItemDecoration(itemDecoration);
-        //
-        //
+
+        //    Замечания и исправления преподавателя на 7-е занятие!!! чтобы открывать бар через 3 полоски
         // И уже из фрагмента туда передавать toolbar, в onViewCreated
         Toolbar toolbar = view.findViewById(R.id.toolbar_list);
 
+        MainActivity activity = (MainActivity) requireActivity(); // getActivity()
 
-        // Не могу разобраться с этим куском кода. хочу открывать бар через 3 полоски
-        //Если раскоментировать, то компилятор не ругается, но при запуке креш
-        // В отличии от занятия у меня  DrawerLayout привязан к фрагменту, вместо  this  я поставил  getActivity(), может поэтому?
-
-        DrawerLayout drawerLayout = view.findViewById(R.id.drawer_layout);
-//
-//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-//               getActivity() ,
-//                drawerLayout,
-//                toolbar,
-//                R.string.open_drawer,
-//                R.string.close_drawer);
-//
-//        drawerLayout.addDrawerListener(toggle);
-//        toggle.syncState();
-
-
+        activity.setDrawerToogle(toolbar); //передаем тул бар в активити
 
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
 
