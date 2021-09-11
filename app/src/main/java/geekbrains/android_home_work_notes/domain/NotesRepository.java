@@ -4,5 +4,6 @@ import java.util.List;
 
 public interface NotesRepository {
 
-    List<Note> getNotes();
+   // List<Note> getNotes(); синхронный вывод
+   void getNotes(Callback<List<Note>> callback); // асинхронный вывод
 }

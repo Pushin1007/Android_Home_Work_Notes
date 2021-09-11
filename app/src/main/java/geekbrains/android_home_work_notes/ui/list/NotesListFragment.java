@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,7 +36,7 @@ import geekbrains.android_home_work_notes.ui.MainActivity;
 import java.util.Collections;
 import java.util.List;
 
-public class  NotesListFragment extends Fragment implements NotesListView {
+public class NotesListFragment extends Fragment implements NotesListView {
 
     public interface OnNoteClicked {
         void onNoteOnClicked(Note note);
@@ -47,6 +48,7 @@ public class  NotesListFragment extends Fragment implements NotesListView {
     private NotesListPresenter presenter;
     private final NotesAdapter adapter = new NotesAdapter();
 
+    private ProgressBar progressBar;
 
     private OnNoteClicked onNoteClicked;
 
@@ -97,6 +99,7 @@ public class  NotesListFragment extends Fragment implements NotesListView {
 //                Snackbar.make(view, note.getNameNote(), Snackbar.LENGTH_SHORT).show();
             }
         });
+        progressBar = view.findViewById(R.id.progress);
 
 
         RecyclerView notesList = view.findViewById(R.id.notes_list);
@@ -106,7 +109,7 @@ public class  NotesListFragment extends Fragment implements NotesListView {
         notesList.setAdapter(adapter);
 
         presenter.requestNotes();
-
+//Декоратор
         DividerItemDecoration itemDecoration = new DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL);
         itemDecoration.setDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.bg_separator));
         notesList.addItemDecoration(itemDecoration);
@@ -149,5 +152,16 @@ public class  NotesListFragment extends Fragment implements NotesListView {
         adapter.setNotes(notes);
         adapter.notifyDataSetChanged();
     }
+
+    @Override
+    public void showProgress() {
+        progressBar.setVisibility(View.VISIBLE);
+    }// показать крутилку
+
+    @Override
+    public void hideProgress() {
+        progressBar.setVisibility(View.GONE);
+    } //скрыть крутилку
+
 }
 
