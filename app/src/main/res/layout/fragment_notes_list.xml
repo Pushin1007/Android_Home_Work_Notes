@@ -11,7 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <!--            app:menu="@menu/menu_main"-->
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar_list"
