@@ -19,7 +19,6 @@ public class NoteDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_note_details);
 
 
-
         if (getResources().getBoolean(R.bool.isLandscape)) {
             finish();
         } else {

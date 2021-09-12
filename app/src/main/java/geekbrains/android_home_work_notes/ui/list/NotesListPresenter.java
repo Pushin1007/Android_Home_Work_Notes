@@ -32,4 +32,27 @@ public class NotesListPresenter {
         });
     }
 
+    public void addNote(String nameNote, String dataNote, String textNote) {
+        view.showProgress();
+
+        repository.addNote(nameNote, dataNote, textNote, new Callback<Note>() {
+            @Override
+            public void onSuccess(Note data) {
+                view.hideProgress();
+                view.onNoteAdded(data);
+            }
+        });
+    }
+
+    public void removeNode(Note selectedNote) {
+        view.showProgress();
+
+        repository.removeNote(selectedNote, new Callback<Void>() {
+            @Override
+            public void onSuccess(Void data) {
+                view.hideProgress();
+                view.onNoteRemoved(selectedNote);
+            }
+        });
+    }
 }

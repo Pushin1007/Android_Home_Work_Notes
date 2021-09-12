@@ -11,6 +11,19 @@ import java.util.List;
 public class DeviceNotesRepository implements NotesRepository {
 
     private Handler handler = new Handler(Looper.getMainLooper());
+    private ArrayList<Note> notes = new ArrayList<>();
+
+    public DeviceNotesRepository() {
+        notes.add(new Note("First look", "August 12, 2021", "Some Text"));
+        notes.add(new Note("Layouts", "August 16, 2021", "Some Text"));
+        notes.add(new Note("Activities", "August 19, 2021", "Some Text"));
+        notes.add(new Note("Resourses", "August 23, 2021", "Some Text"));
+        notes.add(new Note("Intents", "August 26, 2021", "Some Text"));
+        notes.add(new Note("Fragments", "August 30, 2021", "Some Text"));
+        notes.add(new Note("Navigation", "September 02, 2021", "Some Text"));
+
+    }
+
 
     @Override
     public void getNotes(Callback<List<Note>> callback) {
@@ -19,8 +32,6 @@ public class DeviceNotesRepository implements NotesRepository {
             @Override
             public void run() {
 
-                ArrayList<Note> notes = new ArrayList<>();
-
                 try {
                     Thread.sleep(3000L);
                 } catch (InterruptedException e) {
@@ -28,22 +39,61 @@ public class DeviceNotesRepository implements NotesRepository {
                 }
 
 
-                notes.add(new Note(R.string.noteName1, R.string.noteData1, R.string.noteText1));
-                notes.add(new Note(R.string.noteName2, R.string.noteData2, R.string.noteText2));
-                notes.add(new Note(R.string.noteName3, R.string.noteData3, R.string.noteText3));
-                notes.add(new Note(R.string.noteName4, R.string.noteData4, R.string.noteText4));
-                notes.add(new Note(R.string.noteName5, R.string.noteData5, R.string.noteText5));
-                notes.add(new Note(R.string.noteName6, R.string.noteData6, R.string.noteText6));
-                notes.add(new Note(R.string.noteName7, R.string.noteData7, R.string.noteText7));
-
-//                for (int i = 0; i < 1000; i++) { //заполнение для теста
-//                    notes.add(new Note(R.string.noteName7, R.string.noteData7, R.string.noteText7));
-//                }
-
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
                         callback.onSuccess(notes);
+                    }
+                });
+            }
+        }).start();
+    }
+
+    @Override
+    public void addNote(String nameNote, String dataNote, String textNote, Callback<Note> callback) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+
+                try {
+                    Thread.sleep(1500L);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                Note result = new Note(nameNote, dataNote, textNote);
+                notes.add(result);
+
+
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        callback.onSuccess(result);
+                    }
+                });
+            }
+        }).start();
+    }
+
+    @Override
+    public void removeNote(Note note, Callback<Void> callback) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                try {
+                    Thread.sleep(1500L);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                notes.remove(note);
+
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        callback.onSuccess(null);
                     }
                 });
             }

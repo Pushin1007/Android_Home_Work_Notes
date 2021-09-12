@@ -142,7 +142,8 @@ public class NoteDetailsFragment extends Fragment {
 
 
     private void setInitialDateTime() {      // установка начальных даты и времени
-        noteData.setText(DateUtils.formatDateTime(getContext(), date.getTimeInMillis(), DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR));
+        noteData.setText(DateUtils.formatDateTime(getContext(), date.getTimeInMillis(),
+                DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR));
     }
 
     DatePickerDialog.OnDateSetListener d = new DatePickerDialog.OnDateSetListener() {      //     установка обработчика выбора даты
