@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import java.util.Calendar;
+import java.util.UUID;
 
 import geekbrains.android_home_work_notes.R;
 import geekbrains.android_home_work_notes.domain.Note;
@@ -55,7 +56,7 @@ public class AddNoteFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Note note = new Note(addName.getText().toString(), DateUtils.formatDateTime(getContext(), date.getTimeInMillis(),
+                Note note = new Note(UUID.randomUUID().toString(),addName.getText().toString(), DateUtils.formatDateTime(getContext(), date.getTimeInMillis(),
                         DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR), addText.getText().toString());
 
                 Bundle bundle = new Bundle();

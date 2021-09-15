@@ -100,7 +100,8 @@ public class NotesListFragment extends Fragment implements NotesListView, Router
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        presenter = new NotesListPresenter(this, new DeviceNotesRepository());
+        presenter = new NotesListPresenter(this, DeviceNotesRepository.INSTANCE);
+
         adapter = new NotesAdapter(this);
     }
 
@@ -200,6 +201,7 @@ public class NotesListFragment extends Fragment implements NotesListView, Router
 
                                     Note note = result.getParcelable(AddNoteFragment.ARG_NOTE_ADD);
                                     presenter.addNote(note.getNameNote(), note.getDataNote(), note.getTextNote());
+                                    adapter.notifyDataSetChanged();
                                 }
                             });
 
