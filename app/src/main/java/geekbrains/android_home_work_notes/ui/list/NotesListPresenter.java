@@ -27,10 +27,6 @@ public class NotesListPresenter {
             @Override
 
             public void onSuccess(List<Note> data) {
-//                view.showNotes(data);
-//
-//                view.hideProgress();
-
                 notes.clear();
                 notes.addAll(data);
 
@@ -47,9 +43,6 @@ public class NotesListPresenter {
         repository.addNote(nameNote, dataNote, textNote, new Callback<Note>() {
             @Override
             public void onSuccess(Note data) {
-//                view.hideProgress();
-//                view.onNoteAdded(data);
-//                view.showNotes(new ArrayList<>(notes));
                 view.hideProgress();
 
                 notes.add(data);
@@ -65,8 +58,7 @@ public class NotesListPresenter {
         repository.removeNote(selectedNote, new Callback<Void>() {
             @Override
             public void onSuccess(Void data) {
-//                view.hideProgress();
-//                view.onNoteRemoved(selectedNote);
+
                 view.hideProgress();
 
                 notes.remove(selectedNote);

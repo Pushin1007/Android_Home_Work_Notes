@@ -17,6 +17,7 @@ import java.util.UUID;
 
 import geekbrains.android_home_work_notes.R;
 import geekbrains.android_home_work_notes.domain.Note;
+import geekbrains.android_home_work_notes.domain.NotesRepository;
 
 
 public class AddNoteFragment extends Fragment {

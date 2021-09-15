@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.material.navigation.NavigationView;
 
 import geekbrains.android_home_work_notes.R;
@@ -36,7 +37,16 @@ public class MainActivity extends AppCompatActivity implements NotesListFragment
         super.onCreate(savedInstanceState);
 
         router = new Router(getSupportFragmentManager());
+
         setContentView(R.layout.activity_main);
+
+        if (savedInstanceState == null) {
+            if (isAuthorized()) {
+                router.showNotesList();
+            } else {
+                router.showAuth();
+            }
+        }
 
         NavigationView navigationView = findViewById(R.id.navigation_view);
 
@@ -48,7 +58,13 @@ public class MainActivity extends AppCompatActivity implements NotesListFragment
                     return true;
                 }
                 if (item.getItemId() == R.id.notes_list_menu) {
-                    router.showNotesList();
+                    if (savedInstanceState == null) {
+                        if (isAuthorized()) {
+                            router.showNotesList();
+                        } else {
+                            router.showAuth();
+                        }
+                    }
                     return true;
                 }
                 return false;
@@ -99,5 +115,9 @@ public class MainActivity extends AppCompatActivity implements NotesListFragment
 
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+    }
+    private boolean isAuthorized() {
+
+        return GoogleSignIn.getLastSignedInAccount( this)!= null;
     }
 }
