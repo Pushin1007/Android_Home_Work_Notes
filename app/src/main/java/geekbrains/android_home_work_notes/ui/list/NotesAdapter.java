@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -21,9 +22,22 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
 
     private OnNoteClickedListener listener;
 
+    private OnNoteLongClickedListener LongClickListener;
+
+    private Fragment fragment;
+
+    public NotesAdapter(Fragment fragment) {
+        this.fragment = fragment;
+    }
+
     public void setNotes(List<Note> toSet) {
         data.clear();
         data.addAll(toSet);
+    }
+
+    public void addNote(Note note) {
+        data.add(note);
+//        notifyItemInserted(data.size() - 1);
     }
 
     @Override
@@ -61,8 +75,42 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
         this.listener = listener;
     }
 
+    public OnNoteLongClickedListener getLongClickListener() {
+        return LongClickListener;
+    }
+
+    public void setLongClickListener(OnNoteLongClickedListener longClickListener) {
+        LongClickListener = longClickListener;
+    }
+
+    public int removeNote(Note selectedNote) {
+        for (int i = 0; i < data.size(); i++) {
+            if (data.get(i).equals(selectedNote)) {
+                data.remove(i);
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public int updateNote(Note note) {
+        for (int i = 0; i < data.size(); i++) {
+            if (data.get(i).equals(note)) {
+                data.set(i, note);
+                return i;
+            }
+        }
+        return -1;
+    }
+
+
     interface OnNoteClickedListener {
         void onNoteClicked(Note note);
+
+    }
+
+    interface OnNoteLongClickedListener {
+        void onNoteLongClicked(Note note);
 
     }
 
@@ -75,6 +123,8 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
         public NotesViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            fragment.registerForContextMenu(itemView);// для контекстного меню вьюшка ячейки зарегестрирована
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -82,6 +132,16 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
                     if (getListener() != null) {
                         getListener().onNoteClicked(data.get(getAdapterPosition()));
                     }
+                }
+            });
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    itemView.showContextMenu();
+                    if (getLongClickListener() != null) {
+                        getLongClickListener().onNoteLongClicked(data.get(getAdapterPosition()));
+                    }
+                    return true;
                 }
             });
 

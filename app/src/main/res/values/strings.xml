@@ -9,13 +9,6 @@
     <string name="noteName6">Fragments</string>
     <string name="noteName7">Navigation</string>
 
-    <string name="noteData1">12.08.2021</string>
-    <string name="noteData2">16.08.2021</string>
-    <string name="noteData3">19.08.2021</string>
-    <string name="noteData4">23.08.2021</string>
-    <string name="noteData5">26.08.2021</string>
-    <string name="noteData6">30.08.2021</string>
-    <string name="noteData7">02.09.2021</string>
 
     <string name="noteText1">Android, будучи Linux-подобной системой,
         тоже оперирует процессами, однако на высоком уровне,
@@ -75,6 +68,10 @@
     <string name="info">This is home work for Android lessons</string>
     <string name="open_drawer">Open drawer</string>
     <string name="close_drawer">Close Drawer</string>
+    <string name="action_delete">Delete this Note</string>
+    <string name="action_update">Update</string>
+    <string name="textNote">Текст заметки</string>
+    <string name="nameNote">Название заметки</string>
 
 
     first look, layouts, activities, resources, intents, fragments, navigation

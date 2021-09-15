@@ -1,6 +1,7 @@
 package geekbrains.android_home_work_notes.ui.list;
 
 
+import geekbrains.android_home_work_notes.domain.Callback;
 import geekbrains.android_home_work_notes.domain.NotesRepository;
 import geekbrains.android_home_work_notes.domain.Note;
 
@@ -18,8 +19,40 @@ public class NotesListPresenter {
     }
 
     public void requestNotes() {
-        List<Note> result = repository.getNotes();
+        view.showProgress();
 
-        view.showNotes(result);
+        repository.getNotes(new Callback<List<Note>>() {
+            @Override
+
+            public void onSuccess(List<Note> data) {
+                view.showNotes(data);
+
+                view.hideProgress();
+            }
+        });
+    }
+
+    public void addNote(String nameNote, String dataNote, String textNote) {
+        view.showProgress();
+
+        repository.addNote(nameNote, dataNote, textNote, new Callback<Note>() {
+            @Override
+            public void onSuccess(Note data) {
+                view.hideProgress();
+                view.onNoteAdded(data);
+            }
+        });
+    }
+
+    public void removeNode(Note selectedNote) {
+        view.showProgress();
+
+        repository.removeNote(selectedNote, new Callback<Void>() {
+            @Override
+            public void onSuccess(Void data) {
+                view.hideProgress();
+                view.onNoteRemoved(selectedNote);
+            }
+        });
     }
 }

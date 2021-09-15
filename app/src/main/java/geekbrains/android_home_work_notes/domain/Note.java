@@ -5,29 +5,55 @@ import android.os.Parcelable;
 
 import androidx.annotation.StringRes;
 
+import java.util.Objects;
+
 public class Note implements Parcelable {
 
-    @StringRes
-    private int nameNote;
+    private String nameNote;
 
-    @StringRes
-    private int dataNote;
+    private String dataNote;
 
-    @StringRes
-    private int textNote;
+    private String textNote;
 
-    public Note(int nameNote, int dataNote, int textNote) {
+    public Note(String nameNote, String dataNote, String textNote) {
         this.nameNote = nameNote;
         this.dataNote = dataNote;
         this.textNote = textNote;
 
     }
 
-    protected Note(Parcel in) {
-        nameNote = in.readInt();
-        dataNote = in.readInt();
-        textNote = in.readInt();
+    public void setNameNote(String nameNote) {
+        this.nameNote = nameNote;
+    }
 
+    public void setDataNote(String dataNote) {
+        this.dataNote = dataNote;
+    }
+
+    public void setTextNote(String textNote) {
+        this.textNote = textNote;
+    }
+
+    protected Note(Parcel in) {
+        nameNote = in.readString();
+        dataNote = in.readString();
+        textNote = in.readString();
+
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Note note = (Note) o;
+        return Objects.equals(nameNote, note.nameNote) &&
+                Objects.equals(dataNote, note.dataNote) &&
+                Objects.equals(textNote, note.textNote);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nameNote, dataNote, textNote);
     }
 
     public static final Creator<Note> CREATOR = new Creator<Note>() {
@@ -42,15 +68,15 @@ public class Note implements Parcelable {
         }
     };
 
-    public int getTextNote() {
+    public String getTextNote() {
         return textNote;
     }
 
-    public int getNameNote() {
+    public String getNameNote() {
         return nameNote;
     }
 
-    public int getDataNote() {
+    public String getDataNote() {
         return dataNote;
     }
 
@@ -61,8 +87,8 @@ public class Note implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(nameNote);
-        dest.writeInt(dataNote);
-        dest.writeInt(textNote);
+        dest.writeString(nameNote);
+        dest.writeString(dataNote);
+        dest.writeString(textNote);
     }
 }
