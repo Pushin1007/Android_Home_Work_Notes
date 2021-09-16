@@ -40,13 +40,13 @@ public class MainActivity extends AppCompatActivity implements NotesListFragment
 
         setContentView(R.layout.activity_main);
 
-        if (savedInstanceState == null) {
-            if (isAuthorized()) {
-                router.showNotesList();
-            } else {
-                router.showAuth();
-            }
-        }
+//        if (savedInstanceState == null) {
+//            if (isAuthorized()) {
+//                router.showNotesList();
+//            } else {
+//                router.showAuth();
+//            }
+//        }
 
         NavigationView navigationView = findViewById(R.id.navigation_view);
 
@@ -58,13 +58,13 @@ public class MainActivity extends AppCompatActivity implements NotesListFragment
                     return true;
                 }
                 if (item.getItemId() == R.id.notes_list_menu) {
-                    if (savedInstanceState == null) {
-                        if (isAuthorized()) {
+//                    if (savedInstanceState == null) {
+//                        if (isAuthorized()) {
                             router.showNotesList();
-                        } else {
-                            router.showAuth();
-                        }
-                    }
+//                        } else {
+//                            router.showAuth();
+//                        }
+//                    }
                     return true;
                 }
                 return false;
@@ -117,7 +117,8 @@ public class MainActivity extends AppCompatActivity implements NotesListFragment
         toggle.syncState();
     }
     private boolean isAuthorized() {
-
-        return GoogleSignIn.getLastSignedInAccount( this)!= null;
+//return true;
+        return GoogleSignIn.getLastSignedInAccount(this)!=null;
+//        return GoogleSignIn.getLastSignedInAccount(requireContext()) != null;
     }
 }

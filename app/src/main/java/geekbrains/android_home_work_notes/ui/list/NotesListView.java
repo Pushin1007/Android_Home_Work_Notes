@@ -11,10 +11,10 @@ public interface NotesListView {
     void showProgress();
 
     void hideProgress();
-
-    void onNoteAdded(Note note);
-
-    void onNoteRemoved(Note selectedNote);
+//
+//    void onNoteAdded(Note note);
+//
+//    void onNoteRemoved(Note selectedNote);
 
 }
 

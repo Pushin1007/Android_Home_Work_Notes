@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -16,29 +18,47 @@ import java.util.List;
 import geekbrains.android_home_work_notes.R;
 import geekbrains.android_home_work_notes.domain.Note;
 
-public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHolder> {
+public class NotesAdapter extends ListAdapter<Note, NotesAdapter.NotesViewHolder> {
 
-    private final ArrayList<Note> data = new ArrayList<>();
+//    private final ArrayList<Note> data = new ArrayList<>();
 
     private OnNoteClickedListener listener;
 
     private OnNoteLongClickedListener LongClickListener;
 
+
+    public static final DiffUtil.ItemCallback<Note> DIFF = new DiffUtil.ItemCallback<Note>() {
+        @Override
+        public boolean areItemsTheSame(@NonNull Note oldItem, @NonNull Note newItem) {
+            return oldItem.getId().equals(newItem.getId());
+        }
+
+        @Override
+        public boolean areContentsTheSame(@NonNull Note oldItem, @NonNull Note newItem) {
+            return oldItem.equals(newItem);
+        }
+    };
     private Fragment fragment;
 
-    public NotesAdapter(Fragment fragment) {
+//    public NotesAdapter(Fragment fragment) {
+//        this.fragment = fragment;
+//    }
+
+    protected NotesAdapter(Fragment fragment) {
+        super(DIFF);
         this.fragment = fragment;
     }
 
-    public void setNotes(List<Note> toSet) {
-        data.clear();
-        data.addAll(toSet);
-    }
 
-    public void addNote(Note note) {
-        data.add(note);
-//        notifyItemInserted(data.size() - 1);
-    }
+//    public void setNotes(List<Note> toSet) {
+//        data.clear();
+//        data.addAll(toSet);
+//    }
+//
+//    public void addNote(Note note) {
+//        data.add(note);
+////        notifyItemInserted(data.size() - 1);
+//    }
 
     @Override
     public int getItemViewType(int position) {
@@ -55,17 +75,19 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
 
     @Override
     public void onBindViewHolder(@NonNull NotesAdapter.NotesViewHolder holder, int position) {
-        Note note = data.get(position);
+//        Note note = data.get(position);
+        Note note = getCurrentList().get(position);
+
 
         holder.getNoteName().setText(note.getNameNote());
 
         holder.getNoteData().setText(note.getDataNote());
     }
 
-    @Override
-    public int getItemCount() {
-        return data.size();
-    }
+//    @Override
+//    public int getItemCount() {
+//        return data.size();
+//    }
 
     public OnNoteClickedListener getListener() {
         return listener;
@@ -83,25 +105,25 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
         LongClickListener = longClickListener;
     }
 
-    public int removeNote(Note selectedNote) {
-        for (int i = 0; i < data.size(); i++) {
-            if (data.get(i).equals(selectedNote)) {
-                data.remove(i);
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    public int updateNote(Note note) {
-        for (int i = 0; i < data.size(); i++) {
-            if (data.get(i).equals(note)) {
-                data.set(i, note);
-                return i;
-            }
-        }
-        return -1;
-    }
+//    public int removeNote(Note selectedNote) {
+//        for (int i = 0; i < data.size(); i++) {
+//            if (data.get(i).equals(selectedNote)) {
+//                data.remove(i);
+//                return i;
+//            }
+//        }
+//        return -1;
+//    }
+//
+//    public int updateNote(Note note) {
+//        for (int i = 0; i < data.size(); i++) {
+//            if (data.get(i).equals(note)) {
+//                data.set(i, note);
+//                return i;
+//            }
+//        }
+//        return -1;
+//    }
 
 
     interface OnNoteClickedListener {
@@ -130,7 +152,8 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
                 public void onClick(View v) {
 
                     if (getListener() != null) {
-                        getListener().onNoteClicked(data.get(getAdapterPosition()));
+//                        getListener().onNoteClicked(data.get(getAdapterPosition()));
+                        getListener().onNoteClicked(getCurrentList().get(getAdapterPosition()));
                     }
                 }
             });
@@ -139,7 +162,8 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
                 public boolean onLongClick(View v) {
                     itemView.showContextMenu();
                     if (getLongClickListener() != null) {
-                        getLongClickListener().onNoteLongClicked(data.get(getAdapterPosition()));
+//                        getLongClickListener().onNoteLongClicked(data.get(getAdapterPosition()));
+                        getLongClickListener().onNoteLongClicked(getCurrentList().get(getAdapterPosition()));
                     }
                     return true;
                 }
