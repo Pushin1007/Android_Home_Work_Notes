@@ -7,20 +7,23 @@ import geekbrains.android_home_work_notes.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class DeviceNotesRepository implements NotesRepository {
 
+    public static final NotesRepository INSTANCE = new FireStoreNotesRepository();
     private Handler handler = new Handler(Looper.getMainLooper());
     private ArrayList<Note> notes = new ArrayList<>();
 
+
     public DeviceNotesRepository() {
-        notes.add(new Note("First look", "August 12, 2021", "Some Text"));
-        notes.add(new Note("Layouts", "August 16, 2021", "Some Text"));
-        notes.add(new Note("Activities", "August 19, 2021", "Some Text"));
-        notes.add(new Note("Resourses", "August 23, 2021", "Some Text"));
-        notes.add(new Note("Intents", "August 26, 2021", "Some Text"));
-        notes.add(new Note("Fragments", "August 30, 2021", "Some Text"));
-        notes.add(new Note("Navigation", "September 02, 2021", "Some Text"));
+        notes.add(new Note("id1","First look", "August 12, 2021", "Some Text"));
+        notes.add(new Note("id2","Layouts", "August 16, 2021", "Some Text"));
+        notes.add(new Note("id3","Activities", "August 19, 2021", "Some Text"));
+        notes.add(new Note("id4","Resourses", "August 23, 2021", "Some Text"));
+        notes.add(new Note("id5","Intents", "August 26, 2021", "Some Text"));
+        notes.add(new Note("id6","Fragments", "August 30, 2021", "Some Text"));
+        notes.add(new Note("id7","Navigation", "September 02, 2021", "Some Text"));
 
     }
 
@@ -50,7 +53,7 @@ public class DeviceNotesRepository implements NotesRepository {
     }
 
     @Override
-    public void addNote(String nameNote, String dataNote, String textNote, Callback<Note> callback) {
+    public void addNote( String nameNote, String dataNote, String textNote, Callback<Note> callback) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -62,7 +65,7 @@ public class DeviceNotesRepository implements NotesRepository {
                     e.printStackTrace();
                 }
 
-                Note result = new Note(nameNote, dataNote, textNote);
+                Note result = new Note(UUID.randomUUID().toString(),nameNote, dataNote, textNote);
                 notes.add(result);
 
 

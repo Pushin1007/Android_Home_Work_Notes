@@ -9,13 +9,16 @@ import java.util.Objects;
 
 public class Note implements Parcelable {
 
+    private final String id;
+
     private String nameNote;
 
     private String dataNote;
 
     private String textNote;
 
-    public Note(String nameNote, String dataNote, String textNote) {
+    public Note(String id, String nameNote, String dataNote, String textNote) {
+        this.id = id;
         this.nameNote = nameNote;
         this.dataNote = dataNote;
         this.textNote = textNote;
@@ -34,7 +37,9 @@ public class Note implements Parcelable {
         this.textNote = textNote;
     }
 
+
     protected Note(Parcel in) {
+        id = in.readString();
         nameNote = in.readString();
         dataNote = in.readString();
         textNote = in.readString();
@@ -46,14 +51,15 @@ public class Note implements Parcelable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Note note = (Note) o;
-        return Objects.equals(nameNote, note.nameNote) &&
+        return Objects.equals(id, note.id) &&
+                Objects.equals(nameNote, note.nameNote) &&
                 Objects.equals(dataNote, note.dataNote) &&
                 Objects.equals(textNote, note.textNote);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nameNote, dataNote, textNote);
+        return Objects.hash(id, nameNote, dataNote, textNote);
     }
 
     public static final Creator<Note> CREATOR = new Creator<Note>() {
@@ -72,8 +78,13 @@ public class Note implements Parcelable {
         return textNote;
     }
 
+
     public String getNameNote() {
         return nameNote;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getDataNote() {
@@ -87,6 +98,7 @@ public class Note implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
         dest.writeString(nameNote);
         dest.writeString(dataNote);
         dest.writeString(textNote);

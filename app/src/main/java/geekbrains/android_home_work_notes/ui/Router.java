@@ -48,4 +48,12 @@ public class Router { //класс который будет открывать 
                 .addToBackStack(null)
                 .commit();
     }
+    public void showAuth() {
+        fragmentManager
+                .beginTransaction()
+                .replace(R.id.notes_list, new AuthFragment())
+                .commit();
+    }
+
+
 }

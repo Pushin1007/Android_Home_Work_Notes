@@ -5,6 +5,7 @@ import geekbrains.android_home_work_notes.domain.Callback;
 import geekbrains.android_home_work_notes.domain.NotesRepository;
 import geekbrains.android_home_work_notes.domain.Note;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class NotesListPresenter {
@@ -12,6 +13,7 @@ public class NotesListPresenter {
     private final NotesListView view;
 
     private final NotesRepository repository;
+    private ArrayList<Note> notes = new ArrayList<>();
 
     public NotesListPresenter(NotesListView view, NotesRepository repository) {
         this.view = view;
@@ -25,7 +27,10 @@ public class NotesListPresenter {
             @Override
 
             public void onSuccess(List<Note> data) {
-                view.showNotes(data);
+                notes.clear();
+                notes.addAll(data);
+
+                view.showNotes(new ArrayList<>(notes));
 
                 view.hideProgress();
             }
@@ -39,7 +44,10 @@ public class NotesListPresenter {
             @Override
             public void onSuccess(Note data) {
                 view.hideProgress();
-                view.onNoteAdded(data);
+
+                notes.add(data);
+
+                view.showNotes(new ArrayList<>(notes));
             }
         });
     }
@@ -50,8 +58,12 @@ public class NotesListPresenter {
         repository.removeNote(selectedNote, new Callback<Void>() {
             @Override
             public void onSuccess(Void data) {
+
                 view.hideProgress();
-                view.onNoteRemoved(selectedNote);
+
+                notes.remove(selectedNote);
+
+                view.showNotes(new ArrayList<>(notes));
             }
         });
     }
