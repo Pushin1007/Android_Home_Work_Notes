@@ -23,7 +23,7 @@ import geekbrains.android_home_work_notes.domain.Note;
 import geekbrains.android_home_work_notes.domain.NotesRepository;
 
 //public class AddNoteFragment extends Fragment {
-public class AddNoteFragment extends BottomSheetDialogFragment {
+public class AddNoteFragment extends DialogFragment {
 
 
     public static final String KEY_NOTE_RESULT_ADD = "KEY_NOTE_RESULT_ADD";
