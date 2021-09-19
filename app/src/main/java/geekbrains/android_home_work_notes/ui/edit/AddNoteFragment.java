@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import android.text.format.DateUtils;
@@ -12,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+
 import java.util.Calendar;
 import java.util.UUID;
 
@@ -19,8 +22,9 @@ import geekbrains.android_home_work_notes.R;
 import geekbrains.android_home_work_notes.domain.Note;
 import geekbrains.android_home_work_notes.domain.NotesRepository;
 
+//public class AddNoteFragment extends Fragment {
+public class AddNoteFragment extends BottomSheetDialogFragment {
 
-public class AddNoteFragment extends Fragment {
 
     public static final String KEY_NOTE_RESULT_ADD = "KEY_NOTE_RESULT_ADD";
     public static final String ARG_NOTE_ADD = "ARG_NOTE_ADD";
@@ -28,15 +32,6 @@ public class AddNoteFragment extends Fragment {
 
     public AddNoteFragment() {
     }
-
-    public static AddNoteFragment newInstance(Note note) {
-        AddNoteFragment fragment = new AddNoteFragment();
-        Bundle args = new Bundle();
-        args.putParcelable(ARG_NOTE_ADD, note);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -67,8 +62,10 @@ public class AddNoteFragment extends Fragment {
                         .setFragmentResult(KEY_NOTE_RESULT_ADD, bundle);
 
                 getParentFragmentManager().popBackStack();
+                dismiss();
             }
         });
 
     }
 }
+

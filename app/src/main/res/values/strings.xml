@@ -72,6 +72,11 @@
     <string name="action_update">Update</string>
     <string name="textNote">Текст заметки</string>
     <string name="nameNote">Название заметки</string>
+    <string name="alert_title">Warning!</string>
+    <string name="alert_message">Are you want to delete this Note?</string>
+    <string name="positive">OK</string>
+    <string name="negative">Cancel</string>
+    <string name="alert_message_yes">If yoy want to delete - print \"yes\".</string>
 
 
     first look, layouts, activities, resources, intents, fragments, navigation
