@@ -195,7 +195,7 @@ public class NotesListFragment extends Fragment implements NotesListView, Router
                     new AddNoteFragment().show(getChildFragmentManager(), "AddNoteFragment");
 
 
-                    getParentFragmentManager().setFragmentResultListener(AddNoteFragment.KEY_NOTE_RESULT_ADD,
+                    getChildFragmentManager().setFragmentResultListener(AddNoteFragment.KEY_NOTE_RESULT_ADD,
                             getViewLifecycleOwner(), new FragmentResultListener() {
                                 @Override
                                 public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
@@ -273,7 +273,7 @@ public class NotesListFragment extends Fragment implements NotesListView, Router
                 router.showEditNote(selectedNote);
 
 
-                getParentFragmentManager().setFragmentResultListener(EditNoteFragment.KEY_NOTE_RESULT,
+                getChildFragmentManager().setFragmentResultListener(EditNoteFragment.KEY_NOTE_RESULT,
                         getViewLifecycleOwner(), new FragmentResultListener() {
                             @Override
                             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
