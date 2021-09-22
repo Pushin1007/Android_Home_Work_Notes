@@ -1,33 +1,28 @@
 package geekbrains.android_home_work_notes.ui.list;
 
 
-import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
-import android.text.format.DateUtils;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -60,6 +55,9 @@ public class NotesListFragment extends Fragment implements NotesListView, Router
     public static final String KEY_SELECTED_NOTE = "KEY_SELECTED_NOTE";
 
     public static final String ARG_NOTE = "ARG_NOTE";
+
+    public static final String KEY_NOTE_RESULT = "KEY_NOTE_RESULT";
+
 
     private Calendar date = Calendar.getInstance();
 
@@ -122,9 +120,10 @@ public class NotesListFragment extends Fragment implements NotesListView, Router
 
                         Note note = result.getParcelable(EditNoteFragment.ARG_NOTE);
 
-                        int index = adapter.updateNote(note);
-
-                        adapter.notifyItemChanged(index);
+//                        int index = adapter.updateNote(note);
+//
+//                        adapter.notifyItemChanged(index);
+                        presenter.updateNote(note);
                     }
                 });
 
@@ -192,23 +191,26 @@ public class NotesListFragment extends Fragment implements NotesListView, Router
                 }
 
                 if (item.getItemId() == R.id.add_note) {
-                    router.showAddNote();
+//                    router.showAddNote();
+                    new AddNoteFragment().show(getChildFragmentManager(), "AddNoteFragment");
 
-                    getParentFragmentManager().setFragmentResultListener(AddNoteFragment.KEY_NOTE_RESULT_ADD,
+
+                    getChildFragmentManager().setFragmentResultListener(AddNoteFragment.KEY_NOTE_RESULT_ADD,
                             getViewLifecycleOwner(), new FragmentResultListener() {
                                 @Override
                                 public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
 
                                     Note note = result.getParcelable(AddNoteFragment.ARG_NOTE_ADD);
                                     presenter.addNote(note.getNameNote(), note.getDataNote(), note.getTextNote());
-                                    adapter.notifyDataSetChanged();
+//                                    adapter.notifyDataSetChanged();
                                 }
                             });
+
 
                     return true;
                 }
                 if (item.getItemId() == R.id.delete_all_notes) {
-                    adapter.setNotes(Collections.emptyList());
+                    adapter.submitList(Collections.emptyList());
                     adapter.notifyDataSetChanged();
                     return true;
                 }
@@ -220,8 +222,9 @@ public class NotesListFragment extends Fragment implements NotesListView, Router
 
     @Override
     public void showNotes(List<Note> notes) {
-        adapter.setNotes(notes);
-        adapter.notifyDataSetChanged();
+        adapter.submitList(notes);
+//        adapter.setNotes(notes);
+//        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -234,20 +237,20 @@ public class NotesListFragment extends Fragment implements NotesListView, Router
         progressBar.setVisibility(View.GONE);
     }
 
-    @Override
-    public void onNoteAdded(Note note) {
+//    @Override
+//    public void onNoteAdded(Note note) {
+//
+//        adapter.addNote(note);
+//        adapter.notifyItemInserted(adapter.getItemCount() - 1);
+//        notesList.smoothScrollToPosition(adapter.getItemCount() - 1);
+//    }
 
-        adapter.addNote(note);
-        adapter.notifyItemInserted(adapter.getItemCount() - 1);
-        notesList.smoothScrollToPosition(adapter.getItemCount() - 1);
-    }
-
-    @Override
-    public void onNoteRemoved(Note selectedNote) {
-        int index = adapter.removeNote(selectedNote);
-        adapter.notifyItemRemoved(index); //С анимацией
-//        adapter.notifyDataSetChanged(); // без анимации
-    }
+//    @Override
+//    public void onNoteRemoved(Note selectedNote) {
+//        int index = adapter.removeNote(selectedNote);
+//        adapter.notifyItemRemoved(index); //С анимацией
+////        adapter.notifyDataSetChanged(); // без анимации
+//    }
 
     @Override
     public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View v, @Nullable ContextMenu.ContextMenuInfo menuInfo) {
@@ -260,17 +263,63 @@ public class NotesListFragment extends Fragment implements NotesListView, Router
     public boolean onContextItemSelected(@NonNull MenuItem item) {
 
         if (item.getItemId() == R.id.action_delete) {
-            presenter.removeNode(selectedNote);
+ //            presenter.removeNode(selectedNote);
+            alertDelete();
             return true;
         }
         if (item.getItemId() == R.id.action_update) {
             if (router != null) {
+
                 router.showEditNote(selectedNote);
+
+
+                getChildFragmentManager().setFragmentResultListener(EditNoteFragment.KEY_NOTE_RESULT,
+                        getViewLifecycleOwner(), new FragmentResultListener() {
+                            @Override
+                            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
+
+                                selectedNote = result.getParcelable(EditNoteFragment.ARG_NOTE);
+//                                presenter.addNote(note.getNameNote(), note.getDataNote(), note.getTextNote());
+//                                adapter.notifyDataSetChanged();
+
+                            }
+                        });
+
+
             }
             return true;
         }
 
         return super.onContextItemSelected(item);
     }
+
+
+    private void alertDelete() {
+
+        View customView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_edit_text, null);
+
+        EditText editText = customView.findViewById(R.id.text_yes);
+
+        AlertDialog dialog = new AlertDialog.Builder(requireContext())
+                .setTitle(R.string.alert_title)
+                .setMessage(R.string.alert_message_yes)
+                .setView(customView)
+                .setIcon(R.drawable.ic_info)
+                .setPositiveButton(R.string.positive, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (editText.getText().toString().equals("yes")) {
+                            presenter.removeNode(selectedNote);
+                        }
+                    }
+                })
+                .setNegativeButton(R.string.negative, null)
+
+                .create();
+
+        dialog.show();
+
+    }
+
 }
 

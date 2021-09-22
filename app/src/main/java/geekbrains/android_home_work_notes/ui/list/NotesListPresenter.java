@@ -67,4 +67,9 @@ public class NotesListPresenter {
             }
         });
     }
+
+    public void updateNote(Note note) {
+        int index = notes.indexOf(note);
+        view.showNotes(notes);
+    }
 }

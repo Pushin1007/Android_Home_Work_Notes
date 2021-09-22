@@ -41,6 +41,8 @@ public class AuthFragment extends Fragment {
                 }
             });
 
+
+
     public AuthFragment() {
         super(R.layout.fragment_auth);
     }
